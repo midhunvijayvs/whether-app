@@ -1,6 +1,5 @@
 
 import './App.css'
-import Weather from './Weather.js'
 import { Breadcrumb, Layout, Menu } from 'antd';
 import { Input, Space } from 'antd';
 import React from 'react';
@@ -10,33 +9,61 @@ import { state, useState, useEffect, setState } from 'react';
 const { Header, Content, Footer } = Layout;
 
 const API_KEY = '39f3e09998ff35b30cfe67ab6b86db20';
-const API_URL1 = 'http://api.openweathermap.org/geo/1.0/direct'
+const API_URL1 = 'http://api.openweathermap.org/geo/1.0/direct';
+
 
 
 const { Search } = Input;
 const query = '';
-const API_URL2 = 'https://api.openweathermap.org/data/2.5/weather'
+const API_URL2 = 'https://api.openweathermap.org/data/2.5/weather';
 
-const suffix = (
-    <AudioOutlined
-        style={{
-            fontSize: 16,
-            color: '#1890ff',
-        }}
-    />
-);
 
-const onSearch = (value) => {
-    console.log(value);
-    const query = value;
-}
-    ;
 
 const App = () => {
+  const [inputCity, setInputCity] = useState('Calicut');
+  const [weatherData, setweatherData] = useState(false);
+  const [cordData, setcordData] = useState(0);
+  let cord = {};
 
-  const [state, setState] = useState(null);
 
-  let cord={};
+  const suffix = (
+    <AudioOutlined
+      style={{
+        fontSize: 16,
+        color: '#1890ff',
+      }}
+    />
+  );
+
+  const onSearch = (value) => {
+    console.log(value);
+    setInputCity(value);
+  }
+
+  useEffect(() => {
+    
+  })
+
+
+  useEffect(() => {
+    console.log(inputCity)
+    getCordinates(inputCity).then((res) => {
+      setcordData(res.data[0]);
+      console.log('cord res: ', res.data[0].lat);
+      console.log('cord Data: ', cordData);
+      console.log('input City:' + inputCity);
+    }).catch((error) => { })
+
+  }, [inputCity])
+
+  useEffect(() => {
+    getWeather().then((res) => {
+      console.log('from API2: ', res);
+      setweatherData(res);
+      console.log('WeatherData:', weatherData);
+      console.log('Temperature', weatherData.data.main.temp);
+    }).catch((error) => { })
+  }, [cordData])
 
   // Make a request for a user with a given ID
 
@@ -44,52 +71,19 @@ const App = () => {
     const params = {
       q: place, appid: API_KEY
     };
-
-    return axios.get(API_URL1, { params})
+    return axios.get(API_URL1, { params })
   }
-  getCordinates('London').then((res) => {
-    cord.latitude = res.data[0].lat;
-    cord.longitude = res.data[0].lon;
-    console.log('from APP'+cord.latitude);
-    
- 
-  }).catch((error) => { })
 
 
-
-  useEffect(() => {
-        
-        
-        
-        
-    setState(cord)
-   
-
-}, [])
-
-
-
-            
-
-           
-        }
-useEffect(() => {
-    if (state) {
-        console.log(state, typeof (state), Object.keys(state))
-       
-        const params = { lat: cord.latitude, lon: cord.longitude, appid: API_KEY };
-axios.get(API_URL2, { params }).then((res) => {
-  cord.latitude = res.data[0].lat;
-  cord.longitude = res.data[0].lon;
-  console.log('from APP'+cord.latitude);
-  
-
-}).catch((error) => { })
-
-
-    }
-}, [state])
-
+  const getWeather = () => {
+    var latitude = cordData.lat;
+    var longitude = cordData.lon;
+    console.log('latitude' + latitude + 'longitude' + longitude);
+    const params = {
+      lat: latitude, lon: longitude, units: 'metric', appid: API_KEY
+    };
+    return axios.get('https://api.openweathermap.org/data/2.5/weather', { params });
+  };
 
 
 
@@ -99,18 +93,7 @@ axios.get(API_URL2, { params }).then((res) => {
       <Header>
         Current Weather
         <div className="logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          items={new Array(2).fill(null).map((_, index) => {
-            const key = index + 1;
-            return {
-              key,
-              label: `nav ${key}`,
-            };
-          })}
-        />
+        
       </Header>
       <Content
         style={{
@@ -123,25 +106,49 @@ axios.get(API_URL2, { params }).then((res) => {
           }}
         >
           <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
+          
+          <Breadcrumb.Item>Weather App</Breadcrumb.Item>
         </Breadcrumb>
+        
+        
         <div className="site-layout-content">
-        <div className='main-frame'>
-            <Space direction="vertical">
-                <Search
-                    placeholder="input search text"
-                    onSearch={onSearch}
-                    style={{
-                        width: 200,
-                    }}
+          <div className='main-frame'>
+            <Space direction="vertical" align='center'>
+              <Search className='search'
+                placeholder="Enter City Name"
+                onSearch={onSearch}
+                style={{
+                  width: 200,
+                }}
 
-                />
+              />
             </Space>
-            <h1 className='place'>Calicut</h1>
-            <p><span>Temperature:</span></p>
-            <p><span>Wind:</span></p>
-        </div>
+
+
+            <h1 className='place'>{inputCity}</h1>
+            <h2>{weatherData && weatherData.data.weather[0].description}</h2>
+            <Space className='cardRow'>
+              <p><span></span>{weatherData && weatherData.data.main.temp} °C</p>
+              <p><span></span>{weatherData && weatherData.data.main.humidity}%</p>
+            </Space>
+
+            <Space className='cardRow cardRowSmall'>
+              <p><span>Feels Like: </span>{weatherData && weatherData.data.main.feels_like}°C</p>
+              <p><span>Pressure: </span>{weatherData && weatherData.data.main.pressure}</p>
+            </Space>
+
+            <Space className='cardRow cardRowSmall'>
+              <p><span>Min: </span>{weatherData && weatherData.data.main.temp_min}°C</p>
+              <p><span>Sea Level: </span>{weatherData && weatherData.data.main.sea_level}m</p>
+            </Space>
+
+            <Space className='cardRow cardRowSmall'>
+              <p><span>Max: </span>{weatherData && weatherData.data.main.temp_max}°C</p>
+              <p><span>Wind: </span>{weatherData && weatherData.data.wind.speed}m/s</p>
+            </Space>
+            
+
+          </div>
 
         </div>
 
@@ -151,10 +158,13 @@ axios.get(API_URL2, { params }).then((res) => {
           textAlign: 'center',
         }}
       >
-        tranetech
+        Tranetech Software Solutions.
       </Footer>
     </Layout>
   );
+
+
+
 }
 
 export default App;

@@ -24,7 +24,11 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.ant-layout-header{
+  color: white;
+  font-size: 25px;
+  font-weight: 600;
+}
 .App-link {
   color: #61dafb;
 }
@@ -37,3 +41,41 @@
     transform: rotate(360deg);
   }
 }
+
+
+.main-frame{
+  margin: auto;
+  padding: 40px;
+  margin-top: 100px;
+  background-color: rgb(84, 143, 211);
+  width: 40%;
+  height: calc(vh - 100px);
+  border-radius: 15px;
+  
+}
+.search{
+  margin-bottom: 20px;
+}
+h1, h2{
+  color: #fff;
+  margin: 0;
+}
+h1{
+  font-size: 40px;
+  font-weight: 600;
+}
+p{
+  margin-bottom: 1rem;
+}
+.cardRow{
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.cardRowSmall{
+  font-size: 20px;
+}
+

@@ -124,27 +124,34 @@ const App = () => {
               />
             </Space>
 
-
+            <Space className='cardRow cardRowSmall'>
             <h1 className='place'>{inputCity}</h1>
-            <h2>{weatherData && weatherData.data.weather[0].description}</h2>
+            </Space>
+           
+            
             <Space className='cardRow'>
-              <p><span></span>{weatherData && weatherData.data.main.temp} °C</p>
-              <p><span></span>{weatherData && weatherData.data.main.humidity}%</p>
+              <p className='tempMain'><span></span>{weatherData && weatherData.data.main.temp} °C</p>
+              <Space direction='vertical'>
+            <img src={`http://openweathermap.org/img/wn/${weatherData && weatherData.data.weather[0].icon}@2x.png`}></img>
+            <h5>{weatherData && weatherData.data.weather[0].description}</h5>
+            <p><span></span>{weatherData && weatherData.data.main.humidity}%</p>
+            </Space>
+              
             </Space>
 
             <Space className='cardRow cardRowSmall'>
-              <p><span>Feels Like: </span>{weatherData && weatherData.data.main.feels_like}°C</p>
-              <p><span>Pressure: </span>{weatherData && weatherData.data.main.pressure}</p>
+              <p><span>Feels Like: </span>{weatherData && weatherData.data.main.feels_like} °C</p>
+              <p><span>Pressure: </span>{weatherData && weatherData.data.main.pressure} hPa</p>
             </Space>
 
             <Space className='cardRow cardRowSmall'>
-              <p><span>Min: </span>{weatherData && weatherData.data.main.temp_min}°C</p>
-              <p><span>Sea Level: </span>{weatherData && weatherData.data.main.sea_level}m</p>
+              <p><span>Min: </span>{weatherData && weatherData.data.main.temp_min} °C</p>
+              <p><span>Sea Level: </span>{weatherData && weatherData.data.main.sea_level} m</p>
             </Space>
 
             <Space className='cardRow cardRowSmall'>
-              <p><span>Max: </span>{weatherData && weatherData.data.main.temp_max}°C</p>
-              <p><span>Wind: </span>{weatherData && weatherData.data.wind.speed}m/s</p>
+              <p><span>Max: </span>{weatherData && weatherData.data.main.temp_max} °C</p>
+              <p><span>Wind: </span>{weatherData && weatherData.data.wind.speed} m/s</p>
             </Space>
             
 

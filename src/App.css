@@ -60,8 +60,14 @@
   
 }
 .ant-input{
-  background-color: #fcd29c;
+  background-color: rgb(189, 110, 8);
   border-radius: 20px;
+}
+.ant-input-search > .ant-input-group > .ant-input-group-addon:last-child, .ant-input-search > .ant-input-group > .ant-input-group-addon:last-child .ant-input-search-button{
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: rgb(189, 110, 8);
+  border-left: none;
 }
 h1, h2,h5,p{
   color: #fff;

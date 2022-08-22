@@ -52,7 +52,7 @@
   width: 600px;
   height: calc(vh - 100px);
   border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 5px 15px;
   
 }
 .search{
@@ -68,6 +68,10 @@
   border-bottom-right-radius: 20px;
   background-color: rgb(189, 110, 8);
   border-left: none;
+}
+
+.ant-input-search-button .anticon-search svg{
+  fill: #fff;
 }
 h1, h2,h5,p{
   color: #fff;

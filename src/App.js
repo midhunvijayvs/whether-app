@@ -137,7 +137,7 @@ const App = () => {
             <Space className='cardRow' align='center'>
               <Space align='end'>
               <img src={tempIcon} className='temp-icon'></img>
-               <p className='tempMain'><span></span>{weatherData && weatherData.data.main.temp} °C</p>
+               <p className='tempMain'><span></span>{weatherData && weatherData.data.main.temp}°C</p>
               </Space>
               
               <Space  align='end'>
@@ -163,7 +163,7 @@ const App = () => {
 
             <Space className='cardRow'>
               <Space>
-                <h5>{weatherData && weatherData.data.weather[0].description}</h5>
+                <p>{weatherData && weatherData.data.weather[0].description}</p>
                 <img className='weatherImg' src={`http://openweathermap.org/img/wn/${weatherData && weatherData.data.weather[0].icon}@2x.png`}></img>
               </Space>
               <p><span>Wind: </span>{weatherData && weatherData.data.wind.speed} km/h</p>

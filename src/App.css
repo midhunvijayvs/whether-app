@@ -27,7 +27,7 @@
   color: white;
   font-size: 25px;
   font-weight: 600;
-  background-color: #30628b;
+  background-color: rgb(165, 109, 36);
 }
 .App-link {
   color: #61dafb;
@@ -42,17 +42,17 @@
   }
 }
 .layout{
-  background-image: linear-gradient(rgb(86, 136, 194), rgb(255, 255, 255));
 }
 
 .main-frame{
   margin: auto;
   padding: 40px;
   margin-top: 100px;
-  background-color: rgb(84, 143, 211);
+  background-color: rgb(189, 110, 8);
   width: 600px;
   height: calc(vh - 100px);
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   
 }
 .search{
@@ -60,18 +60,21 @@
   
 }
 .ant-input{
-  background-color: #ffffff;
+  background-color: #fcd29c;
+  border-radius: 20px;
 }
-h1, h2,h5{
+h1, h2,h5,p{
   color: #fff;
   margin: 0;
+  line-height: 1;
 }
 h1{
   font-size: 40px;
   font-weight: 600;
+  margin-bottom: 30px;
 }
 p{
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
 }
 .tempMain{
   font-size: 70px;
@@ -82,11 +85,26 @@ p{
   display: flex;
   justify-content: space-between;
   color: #fff;
-  font-size: 40px;
+  font-size: 20px;
   font-weight: 600;
 }
-
-.cardRowSmall{
-  font-size: 20px;
+.cardHeader{
+  justify-content: center;
 }
+.min-max img{
+  height: 20px;
+}
+.temp-icon{
+  height: 60px;
+}
+.hum{
+  font-size: 50px;
+}
+.hum-icon{
+height: 50px;
+}
+.cardRowLarge{
+  font-size: 40px;
+}
+
 

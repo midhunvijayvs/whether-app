@@ -5,6 +5,9 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import WeatherWidget from './WeatherWidget.js';
+import { render } from '@testing-library/react';
+import { Counter } from './features/counter/counter';
+
 const { Header, Content, Footer } = Layout;
 
 const API_KEY = '39f3e09998ff35b30cfe67ab6b86db20';
@@ -96,8 +99,9 @@ const App = () => {
           <Breadcrumb.Item>Weather App</Breadcrumb.Item>
         </Breadcrumb>
         
-        <div><WeatherWidget/>
-        </div>
+        <WeatherWidget/>
+        <Counter/>
+
       </Content>
       <Footer
         style={{
@@ -113,4 +117,7 @@ const App = () => {
 
 }
 
+
+
 export default App;
+

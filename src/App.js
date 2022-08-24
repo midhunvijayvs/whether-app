@@ -1,44 +1,24 @@
 
 import './App.css'
-import { Breadcrumb, Layout, Menu } from 'antd';
-import { Input, Space } from 'antd';
+import { Breadcrumb, Layout } from 'antd';
 import React from 'react';
 import axios from 'axios';
-import { AudioOutlined } from '@ant-design/icons';
-import { state, useState, useEffect, setState } from 'react';
-import humidityIcon from './icons/humidity-icon-white.png';
-import arrowDownIcon from './icons/arrow-up.png';
-import arrowUpIcon from './icons/arrow-down.png';
-import tempIcon from './icons/temp-icon.png';
-
+import { useState, useEffect } from 'react';
+import WeatherWidget from './WeatherWidget.js';
 const { Header, Content, Footer } = Layout;
 
 const API_KEY = '39f3e09998ff35b30cfe67ab6b86db20';
 const API_URL1 = 'http://api.openweathermap.org/geo/1.0/direct';
 
 
-
-const { Search } = Input;
-const query = '';
-const API_URL2 = 'https://api.openweathermap.org/data/2.5/weather';
-
-
-
 const App = () => {
   const [inputCity, setInputCity] = useState('Calicut');
   const [weatherData, setweatherData] = useState(false);
   const [cordData, setcordData] = useState(0);
-  let cord = {};
 
 
-  const suffix = (
-    <AudioOutlined
-      style={{
-        fontSize: 16,
-        color: '#1890ff',
-      }}
-    />
-  );
+
+  
 
   const onSearch = (value) => {
     console.log(value);
@@ -94,6 +74,7 @@ const App = () => {
 
 
   return (
+    
     <Layout className="layout">
       <Header>
         Current Weather
@@ -115,74 +96,8 @@ const App = () => {
           <Breadcrumb.Item>Weather App</Breadcrumb.Item>
         </Breadcrumb>
         
-        
-        <div className="site-layout-content">
-          <div className='main-frame'>
-            <div className='cardHeader' direction="vertical" align='center'>
-              <Search className='search'
-                placeholder="Enter City Name"
-                onSearch={onSearch}
-                style={{
-                  width: 200,
-                }}
-
-              />
-            </div>
-
-            <div className='cardRow'>
-              <h1 className='place'>{inputCity}</h1>
-            </div>
-           
-            
-            <Space className='cardRow' align='center'>
-              <Space align='end'>
-              <img src={tempIcon} className='temp-icon'></img>
-               <p className='tempMain'><span></span>{weatherData && weatherData.data.main.temp}°C</p>
-              </Space>
-              
-              <Space  align='end'>
-                <img src={humidityIcon} className='hum-icon'></img>
-                <p className='hum'>{weatherData && weatherData.data.main.humidity}%</p>
-              </Space> 
-            </Space>
-
-            <Space className='cardRow'>
-              <Space size='large' className='min-max' >
-                <Space>
-                <img src={arrowDownIcon}></img>
-                <p>{weatherData && weatherData.data.main.temp_min} °C</p>
-                </Space>
-                <Space>
-                  <img src={arrowUpIcon}></img>
-                  <p>{weatherData && weatherData.data.main.temp_max} °C</p>
-               </Space>
-              </Space>
-              <p><span>Feels Like: </span>{weatherData && weatherData.data.main.feels_like} °C</p>
-              
-            </Space>
-
-            <Space className='cardRow'>
-              <Space>
-                <p>{weatherData && weatherData.data.weather[0].description}</p>
-                <img className='weatherImg' src={`http://openweathermap.org/img/wn/${weatherData && weatherData.data.weather[0].icon}@2x.png`}></img>
-              </Space>
-              <p><span>Wind: </span>{weatherData && weatherData.data.wind.speed} km/h</p>
-            </Space>
-            
-            <Space className='cardRow'>
-              <p><span>Pressure: </span>{weatherData && weatherData.data.main.pressure} hPa</p> 
-              
-                <p><span>Sea Level: </span>{weatherData && weatherData.data.main.sea_level} m</p>
-              
-            </Space>
-
-            
-            
-
-          </div>
-
+        <div><WeatherWidget/>
         </div>
-
       </Content>
       <Footer
         style={{
